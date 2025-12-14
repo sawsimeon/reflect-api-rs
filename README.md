@@ -1,6 +1,5 @@
-# Reflect API (reflect-api-rs)
+# Reflect API (reflect-api-rs) <img src="https://pbs.twimg.com/profile_images/1915772772770291712/WXX_G2-J_400x400.jpg" alt="Reflect Logo" width="50" height="50">
 
-![Reflect Logo](https://pbs.twimg.com/profile_images/1915772772770291712/WXX_G2-J_400x400.jpg)
 
 **Unofficial Rust Library for the Reflect API**
 
@@ -25,6 +24,8 @@ All endpoints are currently stubbed with placeholder/mock JSON responses, making
 - Learning the Reflect API structure
 
 ## Project scaffold
+
+------------
 
 reflect-api-rs/
 ├── Cargo.toml
@@ -79,23 +80,25 @@ reflect-api-rs/
 │       └── mod.rs
 ├── README.md
 
+------------
+
 Each endpoint lives in its own file for easy navigation and modification.
 
 ## Quick start
 
 1. Clone and build:
-
+```bash
    git clone https://github.com/sawsimeon/reflect-api-rs.git
    df reflect-api-rs
    cargo build
-
+```
 2. Run the server:
-
+```bash
    cargo run
-   
+``` 
 
 3. The server listens on 0.0.0.0:3000. Try some endpoints with curl:
-
+```bash
 - Root health
   - GET http://localhost:3000/ → { "status": "reflect api running" }
 - Health
@@ -104,6 +107,7 @@ Each endpoint lives in its own file for easy navigation and modification.
   - GET http://localhost:3000/stablecoins/ → list of available stablecoins
   - GET http://localhost:3000/stablecoins/supply-caps → supply caps
   - POST http://localhost:3000/stablecoins/quote → body { "stablecoin": "rUSD", "amount": 10.0, "side": "mint" }
+``` 
 
 Endpoints are mounted under:
 - /health
