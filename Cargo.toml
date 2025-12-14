@@ -2,6 +2,13 @@
 name = "reflect-api-rs"
 version = "0.0.1"
 edition = "2021"
+description = "Unofficial Rust scaffold and server implementation for the Reflect Stablecoin API"
+readme = "README.md"
+repository = "https://github.com/sawsimeon/reflect-api-rs"
+homepage = "https://github.com/sawsimeon/reflect-api-rs"
+license = "MIT"
+keywords = ["reflect", "stablecoin", "api", "solana", "axum"]
+categories = ["web-programming::http-server", "api-bindings"]
 
 [dependencies]
 axum = { version = "0.7", features = ["json"] }
