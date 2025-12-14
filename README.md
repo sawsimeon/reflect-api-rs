@@ -4,11 +4,11 @@
 
 **Unofficial Rust Library for the Reflect API**
 
-This repository provides a modular, production-ready scaffold for building a backend server compatible with the **Reflect API** — the programmable infrastructure behind [Reflect](https://www.reflect.money/), autonomous money designed for the stablecoin era.
+This repository provides a modular, production-ready scaffold for building a backend server compatible with the **Reflect API** — the programmable infrastructure behind [Reflect](https://docs.reflect.money/reflect-api/), autonomous money designed for the stablecoin era.
 
 Reflect issues income-generating stablecoins (such as **rUSD**, with future support for rEUR and others) that automatically farm the best DeFi rates on Solana while remaining fully liquid, fully insured on-chain, and non-custodial. Every stablecoin earns continuous yield with no lockups, no claims process, and built-in real-time insurance.
 
-The official Reflect API (base URL: `https://prod.api.reflect.money`) enables developers and protocols to:
+The official Reflect API (base URL: `[https://prod.api.reflect.money](https://docs.reflect.money/reflect-api/)`) enables developers and protocols to:
 - Mint and redeem stablecoins
 - Retrieve real-time/historical APYs and exchange rates
 - Set up whitelabeled integrations with branded tokens
