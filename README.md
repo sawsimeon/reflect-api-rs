@@ -27,58 +27,58 @@ All endpoints are currently stubbed with placeholder/mock JSON responses, making
 
 ------------
 
-reflect-api-rs/
-├── Cargo.toml
-├── src/
-│   ├── health/
-│   │   ├── health_check.rs
-│   │   └── mod.rs
-│   ├── stablecoin/
-│   │   ├── generate_burn_transaction.rs
-│   │   ├── generate_mint_transaction.rs
-│   │   ├── get_all_apy.rs
-│   │   ├── get_available_stablecoins.rs
-│   │   ├── get_historical_apy.rs
-│   │   ├── get_historical_exchange_rates.rs
-│   │   ├── get_latest_exchange_rates.rs
-│   │   ├── get_mint_redeem_quote.rs
-│   │   ├── get_realtime_exchange_rate.rs
-│   │   ├── get_specific_apy.rs
-│   │   ├── get_supply_caps.rs
-│   │   └── mod.rs
-│   ├── integration/
-│   │   ├── generate_claim_tx.rs
-│   │   ├── generate_integration_mint_tx.rs
-│   │   ├── generate_redemption_tx.rs
-│   │   ├── get_current_exchange_rate.rs
-│   │   ├── get_historical_integration_stats.rs
-│   │   ├── get_integration_config.rs
-│   │   ├── get_integration_events.rs
-│   │   ├── get_integration_statistics.rs
-│   │   ├── get_integrations_by_authority.rs
-│   │   ├── initialize_integration_flow.rs
-│   │   ├── initialize_integration_vault.rs
-│   │   ├── initialize_integration.rs
-│   │   ├── initialize_stablecoin_token.rs
-│   │   ├── initialize_user_branded_token.rs
-│   │   ├── mint_and_whitelabel.rs
-│   │   ├── mod.rs
-│   │   ├── redeem_whitelabeled.rs
-│   │   ├── reveal_api_key.rs
-│   │   ├── rotate_api_key.rs
-│   │   ├── transfer_mint_authority.rs
-│   │   ├── update_integration_config.rs
-│   │   ├── upload_integration_metadata.rs
-│   │   └── whitelist_users.rs
-│   ├── stats/
-│   │   ├── get_historical_tvl_and_volume.rs
-│   │   ├── get_protocol_statistics.rs
-│   │   └── mod.rs
-│   └── events/
-│       ├── get_events_by_signer.rs
-│       ├── get_recent_events.rs
-│       └── mod.rs
-├── README.md
+
+    ├── Cargo.toml
+    ├── src/
+    │   ├── health/
+    │   │   ├── health_check.rs
+    │   │   └── mod.rs
+    │   ├── stablecoin/
+    │   │   ├── generate_burn_transaction.rs
+    │   │   ├── generate_mint_transaction.rs
+    │   │   ├── get_all_apy.rs
+    │   │   ├── get_available_stablecoins.rs
+    │   │   ├── get_historical_apy.rs
+    │   │   ├── get_historical_exchange_rates.rs
+    │   │   ├── get_latest_exchange_rates.rs
+    │   │   ├── get_mint_redeem_quote.rs
+    │   │   ├── get_realtime_exchange_rate.rs
+    │   │   ├── get_specific_apy.rs
+    │   │   ├── get_supply_caps.rs
+    │   │   └── mod.rs
+    │   ├── integration/
+    │   │   ├── generate_claim_tx.rs
+    │   │   ├── generate_integration_mint_tx.rs
+    │   │   ├── generate_redemption_tx.rs
+    │   │   ├── get_current_exchange_rate.rs
+    │   │   ├── get_historical_integration_stats.rs
+    │   │   ├── get_integration_config.rs
+    │   │   ├── get_integration_events.rs
+    │   │   ├── get_integration_statistics.rs
+    │   │   ├── get_integrations_by_authority.rs
+    │   │   ├── initialize_integration_flow.rs
+    │   │   ├── initialize_integration_vault.rs
+    │   │   ├── initialize_integration.rs
+    │   │   ├── initialize_stablecoin_token.rs
+    │   │   ├── initialize_user_branded_token.rs
+    │   │   ├── mint_and_whitelabel.rs
+    │   │   ├── mod.rs
+    │   │   ├── redeem_whitelabeled.rs
+    │   │   ├── reveal_api_key.rs
+    │   │   ├── rotate_api_key.rs
+    │   │   ├── transfer_mint_authority.rs
+    │   │   ├── update_integration_config.rs
+    │   │   ├── upload_integration_metadata.rs
+    │   │   └── whitelist_users.rs
+    │   ├── stats/
+    │   │   ├── get_historical_tvl_and_volume.rs
+    │   │   ├── get_protocol_statistics.rs
+    │   │   └── mod.rs
+    │   └── events/
+    │       ├── get_events_by_signer.rs
+    │       ├── get_recent_events.rs
+    │       └── mod.rs
+    ├── README.md
 
 ------------
 
