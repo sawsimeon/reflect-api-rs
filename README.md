@@ -1,4 +1,4 @@
-# Reflect API (reflect-api-rs) <img src="https://pbs.twimg.com/profile_images/1915772772770291712/WXX_G2-J_400x400.jpg" alt="Reflect Logo" width="100" height="100">
+# Reflect API (reflect-api-rs) <img src="https://pbs.twimg.com/profile_images/1915772772770291712/WXX_G2-J_400x400.jpg" alt="Reflect Logo" width="250" height="250">
 
 
 **Unofficial Rust Library for the Reflect API**
