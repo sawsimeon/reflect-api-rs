@@ -1,6 +1,10 @@
-use axum::response::{IntoResponse, Json};
-use axum::http::StatusCode;
-use serde::{Deserialize, Serialize};
+use axum::{
+    extract::{Path, Json},
+    http::StatusCode,
+    response::IntoResponse,
+};
+use serde::Deserialize;
+use serde_json::json;
 
 /// Request structure for the `/stablecoin/quote/{type}` endpoint.
 ///
@@ -19,36 +23,6 @@ use serde::{Deserialize, Serialize};
 pub struct QuoteRequest {
     pub stablecoinIndex: u32,
     pub depositAmount: i64,
-}
-
-/// Success response structure for mint/redeem quote.
-///
-/// ### Example Success Response (HTTP 200)
-/// ```json
-/// {
-///   "success": true,
-///   "data": 999000
-/// }
-/// ```
-#[derive(Debug, Serialize)]
-pub struct QuoteSuccessResponse {
-    success: bool,
-    data: i64,
-}
-
-/// Error response structure for mint/redeem quote.
-///
-/// ### Example Error Response (HTTP 400/404/500)
-/// ```json
-/// {
-///   "success": false,
-///   "message": "Invalid request data: depositAmount must be positive"
-/// }
-/// ```
-#[derive(Debug, Serialize)]
-pub struct QuoteErrorResponse {
-    success: bool,
-    message: &'static str,
 }
 
 /// Handler for `POST /stablecoin/quote/{type}`.
@@ -76,34 +50,34 @@ pub struct QuoteErrorResponse {
 /// }
 /// ```
 pub async fn get_mint_redeem_quote(
-    quote_type: &str,
-    req: QuoteRequest,
+    Path(quote_type): Path<String>,
+    Json(req): Json<QuoteRequest>,
 ) -> impl IntoResponse {
     // Validate deposit amount
     if req.depositAmount <= 0 {
-        let error = QuoteErrorResponse {
-            success: false,
-            message: "Invalid request data: depositAmount must be positive",
-        };
+        let error = json!({
+            "success": false,
+            "message": "Invalid request data: depositAmount must be positive"
+        });
         return (StatusCode::BAD_REQUEST, Json(error));
     }
 
     // Simulated calculation: apply a 0.1% fee
     let quoted_amount = req.depositAmount - (req.depositAmount / 1000);
 
-    match quote_type {
+    match quote_type.as_str() {
         "mint" | "redeem" => {
-            let response = QuoteSuccessResponse {
-                success: true,
-                data: quoted_amount,
-            };
+            let response = json!({
+                "success": true,
+                "data": quoted_amount
+            });
             (StatusCode::OK, Json(response))
         }
         _ => {
-            let error = QuoteErrorResponse {
-                success: false,
-                message: "Invalid request type",
-            };
+            let error = json!({
+                "success": false,
+                "message": "Invalid request type"
+            });
             (StatusCode::NOT_FOUND, Json(error))
         }
     }
@@ -111,10 +85,10 @@ pub async fn get_mint_redeem_quote(
 
 /// Example error handler for internal server errors.
 pub async fn get_mint_redeem_quote_error() -> impl IntoResponse {
-    let response = QuoteErrorResponse {
-        success: false,
-        message: "Internal server error",
-    };
+    let response = json!({
+        "success": false,
+        "message": "Internal server error"
+    });
 
     (StatusCode::INTERNAL_SERVER_ERROR, Json(response))
 }
@@ -122,9 +96,9 @@ pub async fn get_mint_redeem_quote_error() -> impl IntoResponse {
 #[cfg(test)]
 mod tests {
     use super::*;
-    use axum::response::IntoResponse;
-    use axum::http::StatusCode;
     use axum::body::to_bytes;
+    use axum::http::StatusCode;
+    use axum::response::IntoResponse;
     use serde_json::Value;
 
     #[tokio::test]
@@ -133,7 +107,13 @@ mod tests {
             stablecoinIndex: 0,
             depositAmount: 1_000_000,
         };
-        let response = get_mint_redeem_quote("mint", req).await.into_response();
+        let response = get_mint_redeem_quote(
+            Path("mint".to_string()),
+            Json(req),
+        )
+        .await
+        .into_response();
+
         let (parts, body) = response.into_parts();
         assert_eq!(parts.status, StatusCode::OK);
 
@@ -150,7 +130,13 @@ mod tests {
             stablecoinIndex: 0,
             depositAmount: 1_000_000,
         };
-        let response = get_mint_redeem_quote("redeem", req).await.into_response();
+        let response = get_mint_redeem_quote(
+            Path("redeem".to_string()),
+            Json(req),
+        )
+        .await
+        .into_response();
+
         let (parts, body) = response.into_parts();
         assert_eq!(parts.status, StatusCode::OK);
 
@@ -167,7 +153,13 @@ mod tests {
             stablecoinIndex: 0,
             depositAmount: -100,
         };
-        let response = get_mint_redeem_quote("mint", req).await.into_response();
+        let response = get_mint_redeem_quote(
+            Path("mint".to_string()),
+            Json(req),
+        )
+        .await
+        .into_response();
+
         let (parts, body) = response.into_parts();
         assert_eq!(parts.status, StatusCode::BAD_REQUEST);
 
@@ -187,7 +179,13 @@ mod tests {
             stablecoinIndex: 0,
             depositAmount: 1_000_000,
         };
-        let response = get_mint_redeem_quote("invalid", req).await.into_response();
+        let response = get_mint_redeem_quote(
+            Path("invalid".to_string()),
+            Json(req),
+        )
+        .await
+        .into_response();
+
         let (parts, body) = response.into_parts();
         assert_eq!(parts.status, StatusCode::NOT_FOUND);
 
@@ -211,3 +209,6 @@ mod tests {
         assert_eq!(json["message"], Value::String("Internal server error".into()));
     }
 }
+
+
+
