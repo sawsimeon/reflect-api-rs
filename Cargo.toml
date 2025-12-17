@@ -11,17 +11,28 @@ keywords = ["reflect", "stablecoin", "api", "solana", "axum"]
 categories = ["web-programming::http-server", "api-bindings"]
 
 [dependencies]
+# Web framework
 axum = { version = "0.7", features = ["json"] }
+
+# Time handling
 chrono = { version = "0.4", features = ["clock"] }
+
+# Async runtime
 tokio = { version = "1.41", features = ["full"] }
-hyper = { version = "0.14", features = ["server"] }
+
+# Serialization
 serde = { version = "1.0", features = ["derive"] }
 serde_json = "1.0"
+
+# Logging / tracing
 tracing = "0.1"
 tracing-subscriber = { version = "0.3", features = ["fmt", "env-filter"] }
-tower-http = { version = "0.4", features = ["cors", "trace"] }
 
-# For convenience in response types
+# Middleware
+tower = "0.5"                # Needed for ServiceExt (oneshot) in tests
+tower-http = { version = "0.5", features = ["cors", "trace"] }
+
+# HTTP types
 http = "0.2"
 
 [profile.dev]
