@@ -129,7 +129,7 @@ mod tests {
 
     /// Unit test: ensure `get_available_stablecoins_error` returns a 500 response with correct JSON structure.
     #[tokio::test]
-    async fn get_available_stablecoins_error() {
+    async fn get_available_stablecoins_error_test() {
         let response = get_available_stablecoins_error().await.into_response();
         let (parts, body) = response.into_parts();
         assert_eq!(parts.status, StatusCode::INTERNAL_SERVER_ERROR);
