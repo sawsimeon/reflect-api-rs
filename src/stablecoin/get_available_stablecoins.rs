@@ -77,21 +77,11 @@ pub struct StablecoinErrorResponse {
 /// # });
 /// ```
 pub async fn get_available_stablecoins() -> impl IntoResponse {
-    // Simulated success case
-    let stablecoins = vec![
-        Stablecoin {
-            index: 0,
-            name: "USDC+".to_string(),
-        },
-        Stablecoin {
-            index: 1,
-            name: "Reflect USD".to_string(),
-        },
-        Stablecoin {
-            index: 2,
-            name: "Reflect EUR".to_string(),
-        },
-    ];
+    // Only USDC+ is available in this scaffold
+    let stablecoins = vec![Stablecoin {
+        index: 0,
+        name: "USDC+".to_string(),
+    }];
 
     let response = StablecoinSuccessResponse {
         success: true,
@@ -121,8 +111,9 @@ mod tests {
     use axum::body::to_bytes;
     use serde_json::Value;
 
+    /// Unit test: ensure `get_available_stablecoins` returns a 200 response with correct JSON structure.
     #[tokio::test]
-    async fn test_success_response_structure() {
+    async fn get_available_stablecoins_success() {
         let response = get_available_stablecoins().await.into_response();
         let (parts, body) = response.into_parts();
         assert_eq!(parts.status, StatusCode::OK);
@@ -132,11 +123,13 @@ mod tests {
 
         assert_eq!(json["success"], Value::Bool(true));
         assert!(json["data"].is_array());
+        assert_eq!(json["data"][0]["index"], Value::Number(0.into()));
         assert_eq!(json["data"][0]["name"], Value::String("USDC+".into()));
     }
 
+    /// Unit test: ensure `get_available_stablecoins_error` returns a 500 response with correct JSON structure.
     #[tokio::test]
-    async fn test_error_response_structure() {
+    async fn get_available_stablecoins_error() {
         let response = get_available_stablecoins_error().await.into_response();
         let (parts, body) = response.into_parts();
         assert_eq!(parts.status, StatusCode::INTERNAL_SERVER_ERROR);
