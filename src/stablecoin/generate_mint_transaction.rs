@@ -113,7 +113,7 @@ pub async fn generate_mint_transaction(
         return (StatusCode::BAD_REQUEST, Json(json!(error)));
     }
 
-    // Validate stablecoin index (only 0 supported in this scaffold)
+    // Validate stablecoin index
     if req.stablecoinIndex != 0 {
         let error = MintErrorResponse {
             success: false,
